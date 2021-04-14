@@ -39,4 +39,5 @@ fig.update_traces(
         line = dict(width = 1, color = 'DarkSlateGrey')
     )
 )
-fig.show()
+
+fig.write_html('component_plot.html')
