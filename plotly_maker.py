@@ -6,10 +6,11 @@ from glob import glob
 import sys
 import os
 
-def main():
+def main(args):
 
-    passthrough_files = glob(os.path.normpath(sys.argv[1]))
-    reduce_by = int(sys.argv[2])
+
+    passthrough_files = glob(os.path.normpath(args[1]))
+    reduce_by = int(args[2])
     df_dict = {
     'Component 0': [],
     'Component 1': [],
@@ -46,7 +47,10 @@ def main():
     fig.write_html('component_plot.html')
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
+  try:
+    if sys.argv[1] == '-h':
         print('Usage: plotly_maker.py [data .cs glob] [reduce_by] [width] [height]')
     else:
-        main()
+        main(sys.argv)
+  except IndexError:
+    print('Usage: plotly_maker.py [data .cs glob] [reduce_by] [width] [height]')
